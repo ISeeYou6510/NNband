@@ -3,60 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <title>Super Wspaniały Licznik</title>
+
 <style>
-    body {
-        background: radial-gradient(circle at top, #111, #000);
-        color: #0ff;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 80px;
-    }
+body {
+    background: radial-gradient(circle at top, #111, #000);
+    color: #0ff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 80px;
+    overflow: hidden;
+}
 
-    h1 {
-        font-size: 3em;
-        margin-bottom: 20px;
-        text-shadow: 0 0 15px #0ff;
-    }
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #0ff;
+}
 
-    #countdown {
-        font-size: 4em;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-shadow: 0 0 20px #0ff;
-    }
+#countdown {
+    font-size: 4em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px #0ff;
+    position: relative;
+    z-index: 5;
+}
 
-    .label {
-        font-size: 1em;
-        color: #aaa;
-        margin-top: 15px;
+/* ===== REFLEKTORY ===== */
+
+.spotlight {
+    position: absolute;
+    bottom: -300px;
+    width: 300px;
+    height: 900px;
+    background: linear-gradient(to top, rgba(0,255,255,0.6), transparent);
+    filter: blur(30px);
+    transform-origin: bottom center;
+    animation: swing 6s ease-in-out infinite alternate;
+}
+
+.spotlight.left {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.spotlight.right {
+    right: 20%;
+    animation-delay: 3s;
+}
+
+@keyframes swing {
+    from {
+        transform: rotate(-45deg);
     }
+    to {
+        transform: rotate(45deg);
+    }
+}
 </style>
 </head>
 <body>
 
+<div class="spotlight left"></div>
+<div class="spotlight right"></div>
+
 <h1>ODLICZANIE DO WYDARZENIA</h1>
 <div id="countdown">Ładowanie…</div>
-<div class="label">dni : godziny : minuty : sekundy</div>
 
 <script>
 /*
-██████████████████████████████████████████████████████████████
 ██████████████████████████████████████████████████████████████
 ██████████████████   TU WPISUJESZ DATĘ   █████████████████████
 ██████████████████   FORMAT: RRRR-MM-DD HH:MM:SS
 ██████████████████   PRZYKŁAD: 2026-12-31 23:59:59
 ██████████████████████████████████████████████████████████████
-██████████████████████████████████████████████████████████████
-                         ↑
-                         ↑
                          ↑
                   TU. WŁAŚNIE TU.
                          ↑
-                         ↑
-                         ↑
 */
 const targetDate = "2026-01-10 13:00:00";
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //      ZMIEŃ TĘ DATĘ. NIC WIĘCEJ NIE DOTYKAJ.
 
 /* --------------------------------------------------------- */
@@ -90,3 +115,4 @@ setInterval(updateCountdown, 1000);
 
 </body>
 </html>
+
