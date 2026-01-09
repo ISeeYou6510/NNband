@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Super Wspaniały Licznik</title>
+<style>
+    body {
+        background: radial-gradient(circle at top, #111, #000);
+        color: #0ff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 80px;
+    }
+
+    h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+        text-shadow: 0 0 15px #0ff;
+    }
+
+    #countdown {
+        font-size: 4em;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-shadow: 0 0 20px #0ff;
+    }
+
+    .label {
+        font-size: 1em;
+        color: #aaa;
+        margin-top: 15px;
+    }
+</style>
+</head>
+<body>
+
+<h1>ODLICZANIE DO WYDARZENIA</h1>
+<div id="countdown">Ładowanie…</div>
+<div class="label">dni : godziny : minuty : sekundy</div>
+
+<script>
+/*
+██████████████████████████████████████████████████████████████
+██████████████████████████████████████████████████████████████
+██████████████████   TU WPISUJESZ DATĘ   █████████████████████
+██████████████████   FORMAT: RRRR-MM-DD HH:MM:SS
+██████████████████   PRZYKŁAD: 2026-12-31 23:59:59
+██████████████████████████████████████████████████████████████
+██████████████████████████████████████████████████████████████
+                         ↑
+                         ↑
+                         ↑
+                  TU. WŁAŚNIE TU.
+                         ↑
+                         ↑
+                         ↑
+*/
+const targetDate = "2026-01-10 13:00:00";
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//      ZMIEŃ TĘ DATĘ. NIC WIĘCEJ NIE DOTYKAJ.
+
+/* --------------------------------------------------------- */
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const target = new Date(targetDate.replace(" ", "T")).getTime();
+
+    const diff = target - now;
+
+    if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "🎉 CZAS MINĄŁ 🎉";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+        days + " : " +
+        String(hours).padStart(2,"0") + " : " +
+        String(minutes).padStart(2,"0") + " : " +
+        String(seconds).padStart(2,"0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
